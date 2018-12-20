@@ -1,0 +1,62 @@
+{% extends "@LddtMain/n2.html.twig" %}
+{% block n3 %}
+    <!-- Template Niveau 3 -->
+    <div class="row">
+    {% if category is defined %}
+    <h1>{{ category.name }}</h1>
+    {% endif %}
+        {% if color is defined %}
+            <h1>{{ color.name }}</h1>
+        {% endif %}
+        {% if tags is defined %}
+            <h1>{{ tags.name }}</h1>
+        {% endif %}
+        {% if author is defined %}
+            <h1>{{ author.name }}</h1>
+        {% endif %}
+        <!-- <div class="alert alert-success">
+                <p>Message de validation </p>
+         </div> -->
+
+        <!--  <div class="alert alert-error">
+               <p>Message d'erreur</p>
+        </div> -->
+        {#La variable draws correspond à la clé envoyé dans la tableau $datas du render #}
+
+        {#équivalent du var_dump PHP#}
+        {#{{ dump(draws) }}#}
+
+        <!-- Boucle For -->
+        {% for draw in draws %}
+        <div class="col-lg-4">
+            <div class="thumbnail">
+                {% if draw.idInstagram is null  %}
+                {#drawPath correspond au nom de l'attribut de l'entité Draw#}
+                {#<img class="img-thumbnail" src="{{ asset("bundles/lddtmain/images/"~draw.drawPath)}}" />#}
+                <img class="img-thumbnail" src="{{ asset(draw.pic.webPath)}}" />
+                {#{{ dump(asset(draw.pic.webPath)) }}#}
+                {% else %}
+                 <img class="img-thumbnail" src="{{ draw.pic.path}}" />
+                {% endif %}
+                    <div class="caption">
+                    <p><strong>{{ draw.title }}</strong></p>
+                    {#draw=ligne du tableau, category=attribut de l'entité Draw, name=attribut de l'entité Category#}
+                    <p><a href="{{ path('lddt_main_list_by_cat',{'id':draw.category.id}) }}">{{ draw.category.name }}</a></p>
+                    <div class="col-lg-3 col-lg-offset-9">
+                        <p class="AuthorName">
+                            {#<a href="#">{{ draw.authorName }}</a>#}
+                            <a href="{{ path('lddt_main_list_by_author',{'id':draw.author.id}) }}">{{ draw.author.username }}</a>
+                            {#<img width="60" class="img-circle" src="{{ asset(draw.author.avatar.getWebPath) }}" />#}
+                        </p>
+                    </div>
+                    <a class="btn btn-small btn-info"
+                       href="{{ path('lddt_main_show',{'id':draw.id}) }}">Voir dessin <i class="icon-eye-open"></i></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- Fin Boucle For -->
+
+
+    </div><!-- Fin Template Niveau 3 -->
+{% endblock n3 %}

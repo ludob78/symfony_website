@@ -1,0 +1,21 @@
+{#héritage template niveau1#}
+{% extends "::n1.html.twig" %}
+
+{#si appel {{ parent() }} alors il s'agit d'une surcharge#}
+{% block title %}{{ parent()}} n2{% endblock title %}
+{#redéfinition du block body si  pas d'appel de la classe parente#}
+{% block body %}
+    {{  include ('@LddtMain/Default/Partials/menu_front_html.twig') }}
+    <!-- Template Niveau 2 -->
+    <div class="container margin-container-top">
+        <div class="row">
+        {% for message in app.flashes("success") %}
+            <div class="alert alert-success"><p>{{ message }}</p></div>
+        {% endfor %}
+        {% for message in app.flashes("info") %}
+            <div class="alert alert-info"><p>{{ message }}</p></div>
+        {% endfor %}
+        </div>
+        {% block n3 %}{% endblock n3 %}
+    </div><!-- fin container-->
+{% endblock body %}

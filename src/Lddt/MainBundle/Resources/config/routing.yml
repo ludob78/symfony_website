@@ -1,0 +1,14 @@
+#Chargement des routes front
+lddt_main_front:
+    resource: "@LddtMainBundle/Resources/config/Front/routing.yml"
+    prefix:   /
+
+#Chargement des routes admin
+lddt_main_admin:
+    resource: "@LddtMainBundle/Resources/config/Admin/routing.yml"
+    prefix:   /admin
+
+#Chargement des routes instagram
+lddt_main_instagram:
+    resource: "@LddtMainBundle/Resources/config/Instagram/routing.yml"
+    prefix:   /instagram
